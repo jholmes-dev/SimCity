@@ -39,8 +39,33 @@ void MapCell::updateAdjacent()
 			case 'R':
 			case 'I':
 			case 'C':
+				
+				int switchPop = ((*map)[r][c].population >= 5) ? 5 : (*map)[r][c].population;
+
+				switch (switchPop)
+				{
+				case 5:
+					adjPop[5]++;
+				case 4:
+					adjPop[4]++;
+				case 3:
+					adjPop[3]++;
+				case 2:
+					adjPop[2]++;
+				case 1:
+					adjPop[1]++;
+				case 0:
+					adjPop[0]++;
+				}
+
 				break;
 			}
 		}
 	}
+}
+
+void MapCell::printAdjDetails()
+{
+	std::cout << "Adjacency for cell: " << row << "," << col << "; of type: " << type << ";" << std::endl;
+	std::cout << "PP:" << adjPowerPlants << "; PL:" << adjPowerLines << "; R:" << adjRoads << "; Pop: [" << adjPop[0] << ", " << adjPop[1] << ", " << adjPop[2] << ", " << adjPop[3] << ", " << adjPop[4] << ", " << adjPop[5] << "];" << std::endl;
 }

@@ -1,4 +1,9 @@
+#ifndef MAPCELL_H_
+# define MAPCELL_H_
 #include "MapCell.h"
+#endif
+
+
 #include <string>
 #include <iostream>
 #include <fstream>

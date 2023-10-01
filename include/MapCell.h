@@ -10,6 +10,11 @@ public:
 	std::vector<std::vector<MapCell>>* map;
 
 	/**
+	 * The cell's current population
+	 */
+	int population = 0;
+
+	/**
 	 * The cell's type
 	 */
 	char type;
@@ -43,13 +48,27 @@ public:
 
 	/**
 	 * Class constructor
+	 * 
 	 */
 	MapCell(std::vector<std::vector<MapCell>> &map, char type, int row, int col);
 
+	/**
+	 * Updates the cell's type with the provided type
+	 * 
+	 * @param newType : The character type to be assigned
+	 */
 	void updateType(char newType);
 
 	/**
-	 * Scans adjacent MapCells and updates the adj variable
+	 * Scans adjacent MapCells and updates the local adjacency variables
+	 * 
 	 */
 	void updateAdjacent();
+
+	/**
+	 * Prints the cell's current adjacency details to the console
+	 * 
+	 */
+	void printAdjDetails();
+
 };

@@ -121,11 +121,13 @@
   <ItemGroup>
     <ClCompile Include="src\FileHandler.cpp" />
     <ClCompile Include="src\MapCell.cpp" />
+    <ClCompile Include="src\MapController.cpp" />
     <ClCompile Include="src\SimCity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\FileHandler.h" />
     <ClInclude Include="include\MapCell.h" />
+    <ClInclude Include="include\MapController.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\region1.csv" />
