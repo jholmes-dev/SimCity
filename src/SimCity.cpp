@@ -1,4 +1,4 @@
-#include "FileHandler.h"
+#include <include/FileHandler.h>
 #include <iostream>
 
 void printMap(std::vector<std::vector<MapCell>> &map)
@@ -22,7 +22,7 @@ void printAdj(MapCell &mc)
 
 int main() 
 {
-    std::string configPath = "./region1.csv";
+    std::string configPath = "../data/region1.csv";
     FileHandler fh(configPath);
     std::vector<std::vector<MapCell>> map;
     fh.generateMap(map);

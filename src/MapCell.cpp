@@ -1,4 +1,4 @@
-#include "MapCell.h"
+#include <include/MapCell.h>
 
 MapCell::MapCell(std::vector<std::vector<MapCell>> &map, char type, int row, int col)
 {
