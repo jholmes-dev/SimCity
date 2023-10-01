@@ -28,5 +28,5 @@ public:
      * Reads the map file and generates a 2D vector with its data
      *
      */
-    void generateMap(std::vector<std::vector<MapCell>>&);
+    bool generateMap(std::vector<std::vector<MapCell>>&);
 };

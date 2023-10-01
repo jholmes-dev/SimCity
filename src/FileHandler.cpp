@@ -1,4 +1,4 @@
-#include <include/FileHandler.h>
+#include "../include/FileHandler.h"
 
 FileHandler::FileHandler(std::string path) 
 {
@@ -10,9 +10,15 @@ bool FileHandler::checkFile()
     return this->configReader.good();
 };
 
-void FileHandler::generateMap(std::vector<std::vector<MapCell>> &map) 
+bool FileHandler::generateMap(std::vector<std::vector<MapCell>> &map) 
 {
     if (this->configReader.is_open()) {
+
+        if (!checkFile()) {
+            std::cout << "File read error." << std::endl;
+            return false;
+        }
+
         std::string configLine;
         int rowIndex = 0;
 
@@ -36,5 +42,11 @@ void FileHandler::generateMap(std::vector<std::vector<MapCell>> &map)
         }
 
     }
+    else {
+        std::cout << "File not open." << std::endl;
+        return false;
+    }
+
+    return true;
 
 };
