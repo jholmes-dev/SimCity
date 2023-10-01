@@ -1,4 +1,4 @@
-#include <include/FileHandler.h>
+#include "../include/FileHandler.h"
 #include <iostream>
 
 void printMap(std::vector<std::vector<MapCell>> &map)
@@ -22,10 +22,13 @@ void printAdj(MapCell &mc)
 
 int main() 
 {
-    std::string configPath = "../data/region1.csv";
+    std::string configPath = "C:/Users/Ginganian/Desktop/SimCity/data/region1.csv";
     FileHandler fh(configPath);
     std::vector<std::vector<MapCell>> map;
-    fh.generateMap(map);
+    
+    if (!fh.generateMap(map)) {
+        return 3;
+    }
 
     map[3][7].updateAdjacent();
     printAdj(map[3][7]);
