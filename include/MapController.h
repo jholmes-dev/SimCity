@@ -1,10 +1,15 @@
-#ifndef MAPCELL_H_
-# define MAPCELL_H_
+#ifndef MAPCELLS_H_
+# define MAPCELLS_H_
 #include "MapCell.h"
+#include "ResidentialCell.h"
+#include "CommercialCell.h"
+#include "IndustrialCell.h"
 #endif
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <fstream>
 
 class MapController
 {
@@ -12,7 +17,7 @@ public:
 	/**
 	 * Pointer to the vector map
 	 */
-	std::vector<std::vector<MapCell>>* map;
+	std::vector<std::vector<MapCell>> map;
 
 	/**
 	 * Current number of available workers
@@ -25,10 +30,10 @@ public:
 	int goods = 0;
 
 	/**
-	 * Class constructor, assigns map to internal variable
-	 * 
+	 * Reads the map file and generates a 2D vector with its data
+	 *
 	 */
-	MapController(std::vector<std::vector<MapCell>>& map);
+	bool generateMap(std::string);
 
 	/**
 	 * Loops through all cells and updates their adjacency data
@@ -41,8 +46,4 @@ public:
 	 * 
 	 */
 	void printMap();
-
-	/**
-	 * Executes a step through each 
-	 */
 };
