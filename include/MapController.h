@@ -15,7 +15,7 @@ public:
 	/**
 	 * Pointer to the vector map
 	 */
-	std::vector<std::vector<MapCell>> map;
+	std::vector<std::vector<MapCell*>> map;
 
 	/**
 	 * Current number of available workers
@@ -38,6 +38,12 @@ public:
 	 * 
 	 */
 	void updateAllAdjacent();
+
+	/**
+	 * Iterates a single step through the simulation
+	 * 
+	 */
+	void stepAll(int& availableWorkers, int& availableGoods, QueueController* queue);
 
 	/**
 	 * Prints the map to the console

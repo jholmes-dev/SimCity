@@ -12,7 +12,7 @@ bool MapController::generateMap(std::string path)
 
         while (configReader) {
             int colIndex = 0;
-            std::vector<MapCell> row;
+            std::vector<MapCell*> row;
             std::getline(configReader, configLine);
 
             if (configLine.length() <= 0) continue;
@@ -21,19 +21,19 @@ bool MapController::generateMap(std::string path)
                 if (configLine[i] != ',') {
 
                     if (configLine[i] == 'R') {
-                        ResidentialCell tempMS(map, configLine[i], rowIndex, colIndex);
+                        ResidentialCell* tempMS = new ResidentialCell(map, configLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
                     else if (configLine[i] == 'I') {
-                        IndustrialCell tempMS(map, configLine[i], rowIndex, colIndex);
+                        IndustrialCell* tempMS = new IndustrialCell(map, configLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
                     else if (configLine[i] == 'C') {
-                        CommercialCell tempMS(map, configLine[i], rowIndex, colIndex);
+                        CommercialCell* tempMS = new CommercialCell(map, configLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
                     else {
-                        MapCell tempMS(map, configLine[i], rowIndex, colIndex);
+                        MapCell* tempMS = new MapCell(map, configLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
 
@@ -61,9 +61,20 @@ void MapController::updateAllAdjacent()
 	{
 		for (int c = 0; c < map[0].size(); c++) 
 		{
-			map[r][c].updateAdjacent();
+			map[r][c]->updateAdjacent();
 		}
 	}
+}
+
+void MapController::stepAll(int& availableWorkers, int& availableGoods, QueueController* queue)
+{
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            map[r][c]->step(availableWorkers, availableGoods, queue);
+        }
+    }
 }
 
 void MapController::printMap()
@@ -72,7 +83,8 @@ void MapController::printMap()
 	{
 		for (int c = 0; c < map[0].size(); c++)
 		{
-			std::cout << map[r][c].type;
+            if (map[r][c]->population > 0) std::cout << map[r][c]->population;
+			else std::cout << map[r][c]->type;
 		}
 		std::cout << std::endl;
 	}

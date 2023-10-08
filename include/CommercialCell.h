@@ -1,5 +1,6 @@
 #pragma once
 #include "MapCell.h"
+#include "QueueController.h"
 
 class CommercialCell : public MapCell {
 public:
@@ -9,5 +10,5 @@ public:
 	 * Iterates this cell through a time step of the simulation
 	 *
 	 */
-	void step();
+	void step(int& availableWorkers, int& availableGoods, QueueController* queue);
 };

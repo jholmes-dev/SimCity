@@ -1,5 +1,6 @@
 #pragma once
 #include "MapCell.h"
+#include "QueueController.h"
 
 class IndustrialCell : public MapCell {
 public:
@@ -13,7 +14,7 @@ public:
 	 * Iterates this cell through a time step of the simulation
 	 *
 	 */
-	void step(const int &workers, const int &goods);
+	void step(int &availableWorkers, int &availableGoods, QueueController* queue);
 
 	/**
 	 * Spread pollution to adjacent cells. Industrial cells are the only cells that pollute
