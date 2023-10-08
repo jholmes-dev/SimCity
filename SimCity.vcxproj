@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -67,6 +67,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir)src;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -88,6 +89,7 @@
     <ClCompile>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>$(ProjectDir)inc;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -119,18 +121,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\FileHandler.cpp" />
+    <ClCompile Include="src\CommercialCell.cpp" />
+    <ClCompile Include="src\IndustrialCell.cpp" />
     <ClCompile Include="src\MapCell.cpp" />
     <ClCompile Include="src\MapController.cpp" />
+    <ClCompile Include="src\QueueController.cpp" />
+    <ClCompile Include="src\QueueNode.cpp" />
+    <ClCompile Include="src\ResidentialCell.cpp" />
     <ClCompile Include="src\SimCity.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\FileHandler.h" />
+    <ClInclude Include="include\CommercialCell.h" />
+    <ClInclude Include="include\IndustrialCell.h" />
+    <ClInclude Include="include\QueueController.h" />
+    <ClInclude Include="include\QueueNode.h" />
+    <ClInclude Include="include\ResidentialCell.h" />
     <ClInclude Include="include\MapCell.h" />
     <ClInclude Include="include\MapController.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\region1.csv" />
+    <Text Include="data\region1.csv">
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

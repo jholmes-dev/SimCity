@@ -1,10 +1,13 @@
-#ifndef MAPCELL_H_
-# define MAPCELL_H_
+#pragma once
 #include "MapCell.h"
-#endif
+#include "ResidentialCell.h"
+#include "CommercialCell.h"
+#include "IndustrialCell.h"
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <fstream>
 
 class MapController
 {
@@ -12,7 +15,7 @@ public:
 	/**
 	 * Pointer to the vector map
 	 */
-	std::vector<std::vector<MapCell>>* map;
+	std::vector<std::vector<MapCell*>> map;
 
 	/**
 	 * Current number of available workers
@@ -25,10 +28,10 @@ public:
 	int goods = 0;
 
 	/**
-	 * Class constructor, assigns map to internal variable
-	 * 
+	 * Reads the map file and generates a 2D vector with its data
+	 *
 	 */
-	MapController(std::vector<std::vector<MapCell>>& map);
+	bool generateMap(std::string);
 
 	/**
 	 * Loops through all cells and updates their adjacency data
@@ -37,12 +40,14 @@ public:
 	void updateAllAdjacent();
 
 	/**
+	 * Iterates a single step through the simulation
+	 * 
+	 */
+	void stepAll(int& availableWorkers, int& availableGoods, QueueController* queue);
+
+	/**
 	 * Prints the map to the console
 	 * 
 	 */
 	void printMap();
-
-	/**
-	 * Executes a step through each 
-	 */
 };

@@ -1,5 +1,9 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
+
+class QueueController;
 
 class MapCell
 {
@@ -7,7 +11,7 @@ public:
 	/**
 	 * Pointer to the map vector
 	 */
-	std::vector<std::vector<MapCell>>* map;
+	std::vector<std::vector<MapCell*>>* map;
 
 	/**
 	 * The cell's current population
@@ -15,15 +19,35 @@ public:
 	int population = 0;
 
 	/**
+	 * The cell's current pollution 
+	 */
+	int pollution = 0;
+
+	/**
 	 * The cell's type
+	 * 
+	 * R represents a residential zone
+	 * I represents an industrial zone
+	 * C represents a commercial zone
+	 * - represents a road
+	 * T represents a powerline
+	 * # represents a powerline over a road
+	 * P represents a power plant
+	 * 
+	 * The cell's type can also be space (" "), representing an empty cell
 	 */
 	char type;
 
 	/**
 	 * The cell's coordinates within the map vector
 	 */
-	int row;
-	int col;
+	int row; // y
+	int col; // x
+
+	/** 
+	 * The cell's total adjacent population
+	 */
+	int totalAdjPop = 0;
 
 	/**
 	 * Array containing the number of adjacent MapCells that contain at least the index value in population.
@@ -50,7 +74,7 @@ public:
 	 * Class constructor
 	 * 
 	 */
-	MapCell(std::vector<std::vector<MapCell>> &map, char type, int row, int col);
+	MapCell(std::vector<std::vector<MapCell*>> &map, char type, int row, int col);
 
 	/**
 	 * Updates the cell's type with the provided type
@@ -70,5 +94,11 @@ public:
 	 * 
 	 */
 	void printAdjDetails();
+
+	/**
+	 * Iterates this cell through a time step of the simulation
+	 *
+	 */
+	virtual void step(int& availableWorkers, int& availableGoods, QueueController* queue);
 
 };
