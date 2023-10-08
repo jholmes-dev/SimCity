@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <vector>
 
@@ -22,8 +23,8 @@ public:
 	/**
 	 * The cell's coordinates within the map vector
 	 */
-	int row;
-	int col;
+	int row; // y
+	int col; // x
 
 	/**
 	 * Array containing the number of adjacent MapCells that contain at least the index value in population.

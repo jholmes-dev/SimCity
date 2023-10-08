@@ -1,10 +1,8 @@
-#ifndef MAPCELLS_H_
-# define MAPCELLS_H_
+#pragma once
 #include "MapCell.h"
 #include "ResidentialCell.h"
 #include "CommercialCell.h"
 #include "IndustrialCell.h"
-#endif
 
 #include <iostream>
 #include <vector>

@@ -1,13 +1,12 @@
-#ifndef MAPCELLS_H_
-# define MAPCELLS_H_
+#pragma once
 #include "MapCell.h"
-#include "ResidentialCell.h"
-#include "CommercialCell.h"
-#include "IndustrialCell.h"
-#endif
 
 class IndustrialCell : public MapCell {
 public:
+	/**
+	 * Use the base class' constructor
+	 * 
+	 */
 	using MapCell::MapCell;
 
 	/**
@@ -15,4 +14,10 @@ public:
 	 *
 	 */
 	void step(const int &workers, const int &goods);
+
+	/**
+	 * Spread pollution to adjacent cells. Industrial cells are the only cells that pollute
+	 * 
+	 */
+	void pollute();
 };

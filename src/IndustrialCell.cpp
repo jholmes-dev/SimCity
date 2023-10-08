@@ -27,6 +27,9 @@
 void IndustrialCell::step(const int &workers, const int &goods)
 {
 	MapCell::updateAdjacent();
+	pollute();
+}
 
-	if (population == 0) {}
+void IndustrialCell::pollute()
+{
 }
