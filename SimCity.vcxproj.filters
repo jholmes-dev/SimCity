@@ -27,6 +27,18 @@
     <ClCompile Include="src\ResidentialCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CommercialCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IndustrialCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QueueNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QueueController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\MapCell.h">
@@ -44,10 +56,14 @@
     <ClInclude Include="include\IndustrialCell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\QueueController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\QueueNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\region1.csv">
-      <Filter>Resource Files</Filter>
-    </None>
+    <Text Include="data\region1.csv" />
   </ItemGroup>
 </Project>
