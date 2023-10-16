@@ -78,7 +78,7 @@ void MapCell::printAdjDetails()
 	std::cout << "PP:" << adjPowerPlants << "; PL:" << adjPowerLines << "; R:" << adjRoads << "; Pop: [" << adjPop[0] << ", " << adjPop[1] << ", " << adjPop[2] << ", " << adjPop[3] << ", " << adjPop[4] << ", " << adjPop[5] << "];" << std::endl;
 }
 
-void MapCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
+bool MapCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
-	return;
+	return false;
 }

@@ -13,8 +13,9 @@ public:
 	/**
 	 * Iterates this cell through a time step of the simulation
 	 *
+	 * @return : Whether or not the cell grew in the current time step
 	 */
-	void step(int &availableWorkers, int &availableGoods, QueueController* queue);
+	bool step(int &availableWorkers, int &availableGoods, QueueController* queue);
 
 	/**
 	 * Spread pollution to adjacent cells. Industrial cells are the only cells that pollute

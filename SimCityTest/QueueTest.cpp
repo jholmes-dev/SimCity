@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "C:/Users/Ginganian/Desktop/SimCity/src/QueueController.cpp"
-#include "C:/Users/Ginganian/Desktop/SimCity/src/QueueNode.cpp"
-#include "C:/Users/Ginganian/Desktop/SimCity/src/MapCell.cpp"
+#include "../src/QueueController.cpp"
+#include "../src/QueueNode.cpp"
+#include "../src/MapCell.cpp"
 
 class QueueControllerTest : public ::testing::Test
 {

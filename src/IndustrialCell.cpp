@@ -24,7 +24,7 @@
  * but each good can only be sold at one commercial cell
 **/
 
-void IndustrialCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
+bool IndustrialCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
 	MapCell::updateAdjacent();
 
