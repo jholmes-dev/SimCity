@@ -27,7 +27,6 @@ QueueNode::QueueNode(MapCell& sourceCell)
 
 void QueueNode::execute(int* workers, int* goods)
 {
-	std::cout << "Executed node: " << priority << std::endl;
 	if (*workers >= reqWorkers && *goods >= reqGoods)
 	{
 		*workers -= reqWorkers;

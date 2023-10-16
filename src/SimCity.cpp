@@ -13,6 +13,7 @@ int main()
     QueueController qc(workers, goods);
     mc.printMap();
     std::cout << std::endl;
+
     for (int i = 0; i < 5; i++)
     {
         mc.stepAll(workers, goods, &qc);
