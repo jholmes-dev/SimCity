@@ -25,25 +25,46 @@
 
 bool ResidentialCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
+	bool growth = false;
 	MapCell::updateAdjacent();
 
 	switch (population)
 	{
 	case 0:
-		if (adjPowerLines >= 1) queue->generateEvent(*this);
-		else if (adjPop[1] >= 1) queue->generateEvent(*this);
+		if (adjPowerLines >= 1) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
+		else if (adjPop[1] >= 1) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	case 1:
-		if (adjPop[1] >= 2) queue->generateEvent(*this);
+		if (adjPop[1] >= 2) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	case 2:
-		if (adjPop[2] >= 4) queue->generateEvent(*this);
+		if (adjPop[2] >= 4) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	case 3:
-		if (adjPop[3] >= 6) queue->generateEvent(*this);
+		if (adjPop[3] >= 6) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	case 4:
-		if (adjPop[4] >= 8) queue->generateEvent(*this);
+		if (adjPop[4] >= 8) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	}
+
+	return growth;
 }

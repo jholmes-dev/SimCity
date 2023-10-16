@@ -16,16 +16,28 @@
 
 bool CommercialCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
+	bool growth = false;
 	MapCell::updateAdjacent();
 
 	switch (population)
 	{
 	case 0:
-		if (adjPowerLines >= 1 && availableWorkers >= 1 && availableGoods >= 1) queue->generateEvent(*this);
-		else if (adjPop[1] >= 1 && availableWorkers >= 1 && availableGoods >= 1) queue->generateEvent(*this);
+		if (adjPowerLines >= 1 && availableWorkers >= 1 && availableGoods >= 1) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
+		else if (adjPop[1] >= 1 && availableWorkers >= 1 && availableGoods >= 1) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	case 1:
-		if (adjPop[1] >= 2 && availableWorkers >= 1 && availableGoods >= 1) queue->generateEvent(*this);
+		if (adjPop[1] >= 2 && availableWorkers >= 1 && availableGoods >= 1) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	}
+
+	return growth;
 }
