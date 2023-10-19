@@ -59,7 +59,6 @@ void QueueController::printQueue()
 	while (currentNode != NULL)
 	{
 		n++;
-		std::cout << n << ":" << currentNode->cell->type << ":" << currentNode->priority << std::endl;
 		currentNode = currentNode->next;
 	}
 }

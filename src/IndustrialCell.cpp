@@ -24,25 +24,39 @@
  * but each good can only be sold at one commercial cell
 **/
 
-void IndustrialCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
+bool IndustrialCell::step(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
+	bool growth = false;
 	MapCell::updateAdjacent();
 
 	switch (population)
 	{
 	case 0:
-		if (adjPowerLines >= 1 && availableWorkers >= 2) queue->generateEvent(*this);
-		else if (adjPop[1] >= 1 && availableWorkers >= 2) queue->generateEvent(*this);
+		if (adjPowerLines >= 1 && availableWorkers >= 2) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
+		else if (adjPop[1] >= 1 && availableWorkers >= 2) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	case 1:
-		if (adjPop[1] >= 2 && availableWorkers >= 2) queue->generateEvent(*this);
+		if (adjPop[1] >= 2 && availableWorkers >= 2) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	case 2:
-		if (adjPop[2] >= 4 && availableWorkers >= 2) queue->generateEvent(*this);
+		if (adjPop[2] >= 4 && availableWorkers >= 2) {
+			queue->generateEvent(*this);
+			growth = true;
+		}
 		break;
 	}
 
 	pollute();
+	return growth;
 }
 
 void IndustrialCell::pollute()
