@@ -18,16 +18,6 @@ public:
 	std::vector<std::vector<MapCell*>> map;
 
 	/**
-	 * Current number of available workers
-	 */
-	int workers = 0;
-
-	/**
-	 * Current number of available goods
-	 */
-	int goods = 0;
-
-	/**
 	 * Reads the map file and generates a 2D vector with its data
 	 *
 	 */
@@ -40,14 +30,26 @@ public:
 	void updateAllAdjacent();
 
 	/**
+	 * Prints the map to the console
+	 *
+	 */
+	void printMap();
+
+	/**
 	 * Iterates a single step through the simulation
 	 * 
 	 */
 	void stepAll(int& availableWorkers, int& availableGoods, QueueController* queue);
 
 	/**
-	 * Prints the map to the console
+	 * Returns the current number of available workers
 	 * 
 	 */
-	void printMap();
+	int getAvailableWorkers();
+
+	/**
+	 * Returns the current number of available goods
+	 *
+	 */
+	int getAvailableGoods();
 };
