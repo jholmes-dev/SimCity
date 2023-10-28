@@ -2,38 +2,39 @@
 
 bool MapController::generateMap(std::string path)
 {
-    std::ifstream configReader;
-    configReader.open(path);
+    std::ifstream mapReader;
+    mapReader.open(path);
 
-    if (configReader.is_open()) {
-
-        std::string configLine;
+    if (mapReader.is_open()) 
+    {
+        std::string mapFileLine;
         int rowIndex = 0;
 
-        while (configReader) {
+        while (mapReader) 
+        {
             int colIndex = 0;
             std::vector<MapCell*> row;
-            std::getline(configReader, configLine);
+            std::getline(mapReader, mapFileLine);
 
-            if (configLine.length() <= 0) continue;
+            if (mapFileLine.length() <= 0) continue;
 
-            for (int i = 0; i < configLine.length(); i++) {
-                if (configLine[i] != ',') {
+            for (int i = 0; i < mapFileLine.length(); i++) {
+                if (mapFileLine[i] != ',') {
 
-                    if (configLine[i] == 'R') {
-                        ResidentialCell* tempMS = new ResidentialCell(map, configLine[i], rowIndex, colIndex);
+                    if (mapFileLine[i] == 'R') {
+                        ResidentialCell* tempMS = new ResidentialCell(map, mapFileLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
-                    else if (configLine[i] == 'I') {
-                        IndustrialCell* tempMS = new IndustrialCell(map, configLine[i], rowIndex, colIndex);
+                    else if (mapFileLine[i] == 'I') {
+                        IndustrialCell* tempMS = new IndustrialCell(map, mapFileLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
-                    else if (configLine[i] == 'C') {
-                        CommercialCell* tempMS = new CommercialCell(map, configLine[i], rowIndex, colIndex);
+                    else if (mapFileLine[i] == 'C') {
+                        CommercialCell* tempMS = new CommercialCell(map, mapFileLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
                     else {
-                        MapCell* tempMS = new MapCell(map, configLine[i], rowIndex, colIndex);
+                        MapCell* tempMS = new MapCell(map, mapFileLine[i], rowIndex, colIndex);
                         row.push_back(tempMS);
                     }
 
@@ -46,8 +47,9 @@ bool MapController::generateMap(std::string path)
         }
 
     }
-    else {
-        std::cout << "File not open." << std::endl;
+    else 
+    {
+        std::cout << "Could not open file. Is the map file path in the config set correctly?" << std::endl;
         return false;
     }
 
@@ -66,6 +68,19 @@ void MapController::updateAllAdjacent()
 	}
 }
 
+void MapController::printMap()
+{
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            if (map[r][c]->population > 0) std::cout << map[r][c]->population;
+            else std::cout << map[r][c]->type;
+        }
+        std::cout << std::endl;
+    }
+}
+
 void MapController::stepAll(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
     for (int r = 0; r < map.size(); r++)
@@ -77,15 +92,32 @@ void MapController::stepAll(int& availableWorkers, int& availableGoods, QueueCon
     }
 }
 
-void MapController::printMap()
+int MapController::getAvailableWorkers()
 {
-	for (int r = 0; r < map.size(); r++)
-	{
-		for (int c = 0; c < map[0].size(); c++)
-		{
-            if (map[r][c]->population > 0) std::cout << map[r][c]->population;
-			else std::cout << map[r][c]->type;
-		}
-		std::cout << std::endl;
-	}
+    int numWorkers = 0;
+
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            if (map[r][c]->type == 'R') numWorkers += map[r][c]->population;
+        }
+    }
+
+    return numWorkers;
+}
+
+int MapController::getAvailableGoods()
+{
+    int numGoods = 0;
+
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            if (map[r][c]->type == 'I') numGoods += map[r][c]->population;
+        }
+    }
+
+    return numGoods;
 }

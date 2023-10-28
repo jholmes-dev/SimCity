@@ -11,6 +11,20 @@ This project takes a city layout input in the format of a CSV, and simulates cit
 - Output the final region state, including regional population and pollution
 - Allow the user to input coordinates for zone analysis, provided the user with detailed information on the sub zone selected
 
+## Config File
+
+The program reads in a config file specified by the user. The config file should contain the following 3 keys:
+* "Region Layout" : The path and filename of the map to be loaded for the simulation.
+* "Time Limit" : The max amount of simulation steps to iterate through
+* "Refresh Rate" : How many steps between displaying the simulation map in the console
+
+Example config file:
+```
+Region Layout:data/region1.csv
+Time Limit:20
+Refresh Rate:1
+```
+
 ## Cell rules
 
 ### Residential

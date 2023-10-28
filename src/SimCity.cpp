@@ -1,21 +1,36 @@
+#include "../include/SimulationController.h"
 #include "../include/MapController.h"
 #include "../include/QueueController.h"
 #include <iostream>
 
 int main() 
 {
-    int workers = 99;
-    int goods = 99;
+    // Prompt user for the config file
+    std::string configPath;
+    std::cout << "Enter config file path: ";
+    std::cin >> configPath;
 
-    std::string configPath = "C:/Users/Ginganian/Desktop/College/CSCE2110/SimCity/SimCity/data/region1.csv";
+    // Initialize the SimulationController, which will handle all simulation actions
+    SimulationController sc(configPath);
+    if (!sc.loadConfig()) return -1; // Config file did not load properly
+
+
+    // Read map, and initialize simulation variables
     MapController mc;
-    if (!mc.generateMap(configPath)) return 0;
+    if (!mc.generateMap(mapFilePath)) return 0;
+    int workers = 0;
+    int goods = 0;
     QueueController qc(workers, goods);
+
+    // Print initial map
     mc.printMap();
     std::cout << std::endl;
 
-    for (int i = 0; i < 20; i++)
+    // Loop through simulation
+    for (int i = 0; i < timeLimit; i++)
     {
+        workers = mc.getAvailableWorkers();
+        goods = mc.getAvailableGoods();
         mc.stepAll(workers, goods, &qc);
         qc.printQueue();
         qc.processQueue();

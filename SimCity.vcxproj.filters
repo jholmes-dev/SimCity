@@ -64,6 +64,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\region1.csv" />
+    <Text Include="data\region1.csv">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="config.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
