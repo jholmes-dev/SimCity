@@ -17,7 +17,7 @@ int main()
 
     // Read map, and initialize simulation variables
     MapController mc;
-    if (!mc.generateMap(mapFilePath)) return 0;
+    if (!mc.generateMap(sc.mapFilePath)) return 0;
     int workers = 0;
     int goods = 0;
     QueueController qc(workers, goods);
@@ -27,7 +27,7 @@ int main()
     std::cout << std::endl;
 
     // Loop through simulation
-    for (int i = 0; i < timeLimit; i++)
+    for (int i = 0; i < sc.timeLimit; i++)
     {
         workers = mc.getAvailableWorkers();
         goods = mc.getAvailableGoods();

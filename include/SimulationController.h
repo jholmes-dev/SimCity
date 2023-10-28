@@ -9,6 +9,7 @@
  */
 class SimulationController
 {
+public:
 	/**
 	 * The path to the simulation's config file
 	 */
