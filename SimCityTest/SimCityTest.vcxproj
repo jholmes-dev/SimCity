@@ -100,6 +100,8 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommercialCellTest.cpp" />
+    <ClCompile Include="IndustrialCellTest.cpp" />
     <ClCompile Include="QueueTest.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
