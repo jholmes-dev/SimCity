@@ -1,7 +1,11 @@
 #include "pch.h"
+#include "../include/QueueController.h"
 #include "../src/QueueController.cpp"
+#include "../include/QueueNode.h"
 #include "../src/QueueNode.cpp"
+#include "../include/MapCell.h"
 #include "../src/MapCell.cpp"
+
 
 class QueueControllerTest : public ::testing::Test
 {
@@ -41,16 +45,16 @@ protected:
 	}
 
 	std::vector<std::vector<MapCell*>> map;
-	MapCell* mc;
-	QueueController* qc;
+	MapCell* mc = NULL;
+	QueueController* qc = NULL;
 	int w = 0;
 	int g = 0;
 
-	QueueNode* n1;
-	QueueNode* n2;
-	QueueNode* n3;
-	QueueNode* n4;
-	QueueNode* n5;
+	QueueNode* n1 = NULL;
+	QueueNode* n2 = NULL;
+	QueueNode* n3 = NULL;
+	QueueNode* n4 = NULL;
+	QueueNode* n5 = NULL;
 };
 
 TEST_F(QueueControllerTest, TestInsertionOrder)
