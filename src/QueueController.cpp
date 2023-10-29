@@ -6,6 +6,19 @@ QueueController::QueueController(int& w, int& g)
 	this->goods = &g;
 }
 
+QueueController::~QueueController()
+{
+	// Delete queue nodes
+	QueueNode* qn = head;
+
+	while (qn != NULL)
+	{
+		QueueNode* tmp = qn->next;
+		delete qn;
+		qn = tmp;
+	}
+}
+
 void QueueController::insert(QueueNode* node)
 {
 	// Check if we need to insert node at front of list

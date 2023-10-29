@@ -1,5 +1,17 @@
 #include "../include/MapController.h"
 
+MapController::~MapController()
+{
+    // Delete all map cells
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            delete map[r][c];
+        }
+    }
+}
+
 bool MapController::generateMap(std::string path)
 {
     std::ifstream mapReader;
@@ -74,8 +86,8 @@ void MapController::printMap()
     {
         for (int c = 0; c < map[0].size(); c++)
         {
-            if (map[r][c]->population > 0) std::cout << map[r][c]->population;
-            else std::cout << map[r][c]->type;
+            if (map[r][c]->population > 0) std::cout << map[r][c]->population << " ";
+            else std::cout << map[r][c]->type << " ";
         }
         std::cout << std::endl;
     }
@@ -93,6 +105,24 @@ void MapController::printPollutionMap()
     }
 }
 
+void MapController::printCombinedMap()
+{
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            // Print cell type if pop is 0, otherwise print cell pop
+            if (map[r][c]->population > 0) std::cout << map[r][c]->population;
+            else std::cout << map[r][c]->type;
+
+            // Print pollution if the cell has any
+            if (map[r][c]->pollution > 0) std::cout << "(" << map[r][c]->pollution << ")";
+
+            std::cout << "\t";
+        }
+        std::cout << std::endl;
+    }
+}
 
 void MapController::stepAll(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
@@ -103,34 +133,51 @@ void MapController::stepAll(int& availableWorkers, int& availableGoods, QueueCon
             map[r][c]->step(availableWorkers, availableGoods, queue);
         }
     }
+
+    updateMapInfo();
 }
 
-int MapController::getAvailableWorkers()
+int MapController::getTotalPollution()
 {
-    int numWorkers = 0;
+    int totPollution = 0;
 
     for (int r = 0; r < map.size(); r++)
     {
         for (int c = 0; c < map[0].size(); c++)
         {
-            if (map[r][c]->type == 'R') numWorkers += map[r][c]->population;
+            totPollution += map[r][c]->pollution;
         }
     }
 
-    return numWorkers;
+    return totPollution;
 }
 
-int MapController::getAvailableGoods()
+int MapController::getTotalPopulation()
 {
-    int numGoods = 0;
+    int totPop = 0;
 
     for (int r = 0; r < map.size(); r++)
     {
         for (int c = 0; c < map[0].size(); c++)
         {
-            if (map[r][c]->type == 'I') numGoods += map[r][c]->population;
+            totPop += map[r][c]->population;
         }
     }
 
-    return numGoods;
+    return totPop;
+}
+
+void MapController::updateMapInfo()
+{
+    totalPollution = 0;
+    totalPopulation = 0;
+
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            totalPollution += map[r][c]->pollution;
+            totalPopulation += map[r][c]->population;
+        }
+    }
 }

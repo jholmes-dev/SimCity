@@ -22,6 +22,11 @@ public:
 	std::string mapFilePath = "";
 
 	/**
+	 * The current step in the simulation
+	 */
+	int simStep = 0;
+
+	/**
 	 * The simulation step limit
 	 */
 	int timeLimit = 10;
@@ -55,6 +60,12 @@ public:
 	SimulationController(std::string path);
 
 	/**
+	 * Destructor for cleaning up child elements and freeing memory
+	 * 
+	 */
+	~SimulationController();
+
+	/**
 	 * Initializes the simulation
 	 * 
 	 * @return bool : If config was properly loaded and simuilation is ready
@@ -69,9 +80,27 @@ public:
 	bool loadConfig();
 
 	/**
+	 * Automatically runs the simulation, outputting the map and info at the refresh rate defined in the config file
+	 * 
+	 */
+	void runFullSimulation();
+
+	/**
 	 * Iterates one step forward through the simulation
 	 * 
 	 */
 	void stepNext();
+
+	/**
+	 * Outputs a full info screen
+	 * 
+	 */
+	void printFullStepInfo();
+
+	/**
+	 * Prints information on the current simulation step
+	 * 
+	 */
+	void printStepInfo();
 
 };

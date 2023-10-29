@@ -5,6 +5,12 @@ SimulationController::SimulationController(std::string path)
     configFilePath = path;
 }
 
+SimulationController::~SimulationController()
+{
+    delete qc; 
+    delete mc;
+}
+
 bool SimulationController::initialize()
 {
     if (!loadConfig()) return false; // Config file did not load properly
@@ -15,6 +21,9 @@ bool SimulationController::initialize()
 
     // Read map
     if (!mc->generateMap(mapFilePath)) return false;
+
+    // Step simulation once to initialize queue
+    stepNext();
 
     return true;
 }
@@ -88,10 +97,57 @@ bool SimulationController::loadConfig()
     return true;
 }
 
+void SimulationController::runFullSimulation()
+{
+    for (int i = 0; i < timeLimit - 1; i++)
+    {
+        // Print simulation info at refresh rate
+        if (i % refreshRate == 0)
+        {
+            printFullStepInfo();
+        }
+
+        // Save variables to check if there is no change between steps
+        int prevPop = mc->totalPopulation;
+        int prevW = workers;
+        int prevG = goods;
+
+        // Step single
+        stepNext();
+
+        // Compare sim states. Stop sim if there's no change
+        if (prevPop == mc->totalPopulation && prevW == workers && prevG == goods)
+        {
+            std::cout << "No change between sim steps. Simulation stopped." << std::endl << std::endl;
+            break;
+        }
+    }
+    
+    // Output final state
+    std::cout << "Final state:" << std::endl;
+    printFullStepInfo();
+}
+
 void SimulationController::stepNext()
 {
-    workers = mc->getAvailableWorkers();
-    goods = mc->getAvailableGoods();
     qc->processQueue();
-    mc->stepAll(workers, goods, qc);
+    mc->stepAll(workers, goods, qc); 
+    simStep++;
+}
+
+void SimulationController::printFullStepInfo()
+{
+    std::cout << "---------------------------------------------------------" << std::endl;
+    printStepInfo();
+    std::cout << std::endl;
+    mc->printCombinedMap();
+    std::cout << std::endl;
+    std::cout << "---------------------------------------------------------" << std::endl;
+}
+
+void SimulationController::printStepInfo()
+{
+    std::cout << "** Simulation Step " << simStep << " **" << std::endl;
+    std::cout << "Workers\tGoods\tPop\tPoll" << std::endl;
+    std::cout << workers << "\t" << goods << "\t" << mc->totalPopulation << "\t" << mc->totalPollution << std::endl;
 }

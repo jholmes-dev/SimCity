@@ -1,10 +1,10 @@
 #include "../include/QueueNode.h"
 
-QueueNode::QueueNode(MapCell& sourceCell, int workers, int goods)
+QueueNode::QueueNode(MapCell& sourceCell, int rWorkers, int rGoods)
 {
 	this->cell = &sourceCell;
-	this->reqWorkers = workers;
-	this->reqGoods = goods;
+	this->reqWorkers = rWorkers;
+	this->reqGoods = rGoods;
 	setPriority();
 }
 
@@ -29,9 +29,21 @@ void QueueNode::execute(int* workers, int* goods)
 {
 	if (*workers >= reqWorkers && *goods >= reqGoods)
 	{
+		// Adjust population
 		*workers -= reqWorkers;
 		*goods -= reqGoods;
 		cell->population++;
+
+		// Adjust workers or goods depending on this cell's type
+		switch (cell->type)
+		{
+		case 'R':
+			(*workers)++;
+			break;
+		case 'I':
+			(*goods)++;
+			break;
+		}
 	}
 }
 

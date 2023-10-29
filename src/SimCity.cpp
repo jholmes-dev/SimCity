@@ -25,13 +25,14 @@ int main()
     std::cout << "Available commands:" << std::endl;
     std::cout << "\ta: Runs the full simulation to the end" << std::endl;
     std::cout << "\tn: Manually steps the simulation once" << std::endl;
+    std::cout << "\ti: Prints the current simulation step info" << std::endl;
     std::cout << "\tm: Prints the map" << std::endl;
     std::cout << "\tp: Prints the pollution map" << std::endl;
-    std::cout << "\te: Prints the current queue" << std::endl;
-    std::cout << "\tq: Quits the program" << std::endl << std::endl;
+    std::cout << "\tq: Prints the current queue" << std::endl;
+    std::cout << "\tc: Quits the program" << std::endl << std::endl;
 
     // Loop for user input
-    char input = 'q';
+    char input = 'c';
     do
     {
         std::cout << "Enter a command: ";
@@ -40,10 +41,13 @@ int main()
         switch (input)
         {
         case 'a': // Auto run the simulation
-
+            sc.runFullSimulation();
             break;
         case 'n': // Next simulation step
             sc.stepNext();
+            break;
+        case 'i': // Print current step info
+            sc.printStepInfo();
             break;
         case 'm': // Print map
             sc.mc->printMap();
@@ -51,19 +55,16 @@ int main()
         case 'p': // Print pollution map
             sc.mc->printPollutionMap();
             break;
-        case 'e': // Print queue
+        case 'q': // Print queue
             sc.qc->printQueue();
             break;
-        case 'q': // Quit program
+        case 'c': // Quit program
             break;
         default:
             std::cout << "Not a valid input." << std::endl;
         }
 
         std::cout << std::endl;
-    } while (input != 'q');
+    } while (input != 'c');
 
-    // Loop through simulation
-    //for (int i = 0; i < sc.timeLimit; i++)
-    //{}
 }
