@@ -5,6 +5,20 @@ SimulationController::SimulationController(std::string path)
     configFilePath = path;
 }
 
+bool SimulationController::initialize()
+{
+    if (!loadConfig()) return false; // Config file did not load properly
+
+    // Initialize map and queue controllers
+    mc = new MapController();
+    qc = new QueueController(workers, goods);
+
+    // Read map
+    if (!mc->generateMap(mapFilePath)) return false;
+
+    return true;
+}
+
 bool SimulationController::loadConfig()
 {
     // Load config file
@@ -72,4 +86,12 @@ bool SimulationController::loadConfig()
     }
 
     return true;
+}
+
+void SimulationController::stepNext()
+{
+    workers = mc->getAvailableWorkers();
+    goods = mc->getAvailableGoods();
+    qc->processQueue();
+    mc->stepAll(workers, goods, qc);
 }

@@ -36,6 +36,12 @@ public:
 	void printMap();
 
 	/**
+	 * Prints the pollution map to the console
+	 *
+	 */
+	void printPollutionMap();
+
+	/**
 	 * Iterates a single step through the simulation
 	 * 
 	 */

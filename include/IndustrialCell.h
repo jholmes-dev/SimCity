@@ -19,6 +19,8 @@ public:
 
 	/**
 	 * Spread pollution to adjacent cells. Industrial cells are the only cells that pollute
+	 * Pollution increases for this cell at a rate of population. Pollution then spreads to
+	 * adjacent cells at a rate of population - disatance.
 	 * 
 	 */
 	void pollute();

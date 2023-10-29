@@ -58,6 +58,12 @@ void QueueController::printQueue()
 	int n = 0;
 	while (currentNode != NULL)
 	{
+		std::cout << "Coords\treqW\treqG\tPriority" << std::endl;
+		std::cout << "(" << currentNode->cell->col << "," << currentNode->cell->row << ")" << "\t";
+		std::cout << currentNode->reqWorkers << "\t";
+		std::cout << currentNode->reqGoods << "\t";
+		std::cout << currentNode->priority << "\t";
+		std::cout << std::endl;
 		n++;
 		currentNode = currentNode->next;
 	}

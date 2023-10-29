@@ -61,4 +61,23 @@ bool IndustrialCell::step(int& availableWorkers, int& availableGoods, QueueContr
 
 void IndustrialCell::pollute()
 {
+	// Distance spread will be population - 1
+	int distance = population - 1;
+
+	// Loop through cells
+	// Starting cell will be (x-dist, y-dist)
+	// Ending cell will be (x+dist, y+dist)
+	for (int r = row - distance; r <= row + distance; r++) {
+		if (r < 0 || r >= (*map).size()) continue; // Out of bounds checking
+
+		for (int c = col - distance; c <= col + distance; c++) {
+			if (c < 0 || c >= (*map)[0].size()) continue; // Out of bounds checking
+
+			// Each cell will receive pollution of population - max(abs(r - row), abs(c - col))
+			// Where r & c are the current iterated cell, and row & col are the source cell
+			int curPoll = population - std::max(abs(r - row), abs(c - col));
+			(*map)[r][c]->pollution += curPoll;
+
+		}
+	}
 }

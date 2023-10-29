@@ -134,6 +134,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\region2.csv" />
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

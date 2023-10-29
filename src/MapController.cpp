@@ -81,6 +81,19 @@ void MapController::printMap()
     }
 }
 
+void MapController::printPollutionMap()
+{
+    for (int r = 0; r < map.size(); r++)
+    {
+        for (int c = 0; c < map[0].size(); c++)
+        {
+            std::cout << map[r][c]->pollution << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+
 void MapController::stepAll(int& availableWorkers, int& availableGoods, QueueController* queue)
 {
     for (int r = 0; r < map.size(); r++)
