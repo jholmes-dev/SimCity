@@ -23,11 +23,12 @@ int main()
     // Output available commands
     std::cout << std::endl;
     std::cout << "Available commands:" << std::endl;
-    std::cout << "\ta: Runs the full simulation to the end" << std::endl;
+    std::cout << "\tr: Runs the full simulation to the end" << std::endl;
     std::cout << "\tn: Manually steps the simulation once" << std::endl;
     std::cout << "\ti: Prints the current simulation step info" << std::endl;
     std::cout << "\tm: Prints the map" << std::endl;
     std::cout << "\tp: Prints the pollution map" << std::endl;
+    std::cout << "\ta: Prints a combined cell/pollution map" << std::endl;
     std::cout << "\tq: Prints the current queue" << std::endl;
     std::cout << "\tc: Quits the program" << std::endl << std::endl;
 
@@ -40,7 +41,7 @@ int main()
 
         switch (input)
         {
-        case 'a': // Auto run the simulation
+        case 'r': // Auto run the simulation
             sc.runFullSimulation();
             break;
         case 'n': // Next simulation step
@@ -54,6 +55,9 @@ int main()
             break;
         case 'p': // Print pollution map
             sc.mc->printPollutionMap();
+            break;
+        case 'a':
+            sc.mc->printCombinedMap();
             break;
         case 'q': // Print queue
             sc.qc->printQueue();
