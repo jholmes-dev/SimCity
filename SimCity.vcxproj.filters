@@ -39,6 +39,9 @@
     <ClCompile Include="src\QueueController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SimulationController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\MapCell.h">
@@ -62,8 +65,19 @@
     <ClInclude Include="include\QueueNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\SimulationController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\region1.csv" />
+    <Text Include="data\region1.csv">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="config.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

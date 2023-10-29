@@ -18,14 +18,20 @@ public:
 	std::vector<std::vector<MapCell*>> map;
 
 	/**
-	 * Current number of available workers
+	 * Total population of the map
 	 */
-	int workers = 0;
+	int totalPopulation = 0;
 
 	/**
-	 * Current number of available goods
+	 * Total pollution on the map
 	 */
-	int goods = 0;
+	int totalPollution = 0;
+
+	/**
+	 * Destructor
+	 * 
+	 */
+	~MapController();
 
 	/**
 	 * Reads the map file and generates a 2D vector with its data
@@ -40,14 +46,44 @@ public:
 	void updateAllAdjacent();
 
 	/**
+	 * Prints the map to the console
+	 *
+	 */
+	void printMap();
+
+	/**
+	 * Prints the pollution map to the console
+	 *
+	 */
+	void printPollutionMap();
+
+	/**
+	 * Prints a combined version of the cell and pollution map
+	 * 
+	 */
+	void printCombinedMap();
+
+	/**
 	 * Iterates a single step through the simulation
 	 * 
 	 */
 	void stepAll(int& availableWorkers, int& availableGoods, QueueController* queue);
 
 	/**
-	 * Prints the map to the console
+	 * Returns the total pollution on the map
 	 * 
 	 */
-	void printMap();
+	int getTotalPollution();
+
+	/**
+	 * Returns the total population of the map cells
+	 *
+	 */
+	int getTotalPopulation();
+
+	/**
+	 * Scans the map and updates the local pop and poll variables
+	 *
+	 */
+	void updateMapInfo(); 
 };

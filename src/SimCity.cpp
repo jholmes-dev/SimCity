@@ -1,26 +1,74 @@
+#include "../include/SimulationController.h"
 #include "../include/MapController.h"
 #include "../include/QueueController.h"
 #include <iostream>
 
 int main() 
 {
-    int workers = 99;
-    int goods = 99;
+    // Splash
+    std::cout << "******************************" << std::endl;
+    std::cout << "********** SIM CITY **********" << std::endl;
+    std::cout << "***** By: Jeffrey Holmes *****" << std::endl;
+    std::cout << "******************************" << std::endl;
 
-    std::string configPath = "C:/Users/Ginganian/Desktop/College/CSCE2110/SimCity/SimCity/data/region1.csv";
-    MapController mc;
-    if (!mc.generateMap(configPath)) return 0;
-    QueueController qc(workers, goods);
-    mc.printMap();
+    // Prompt user for the config file
+    std::string configPath;
+    std::cout << "Enter config file path: ";
+    std::cin >> configPath;
+
+    // Initialize the SimulationController, which will handle all simulation actions
+    SimulationController sc(configPath);
+    if (!sc.initialize()) return -1; // Config file did not load properly    
+
+    // Output available commands
     std::cout << std::endl;
+    std::cout << "Available commands:" << std::endl;
+    std::cout << "\tr: Runs the full simulation to the end" << std::endl;
+    std::cout << "\tn: Manually steps the simulation once" << std::endl;
+    std::cout << "\ti: Prints the current simulation step info" << std::endl;
+    std::cout << "\tm: Prints the map" << std::endl;
+    std::cout << "\tp: Prints the pollution map" << std::endl;
+    std::cout << "\ta: Prints a combined cell/pollution map" << std::endl;
+    std::cout << "\tq: Prints the current queue" << std::endl;
+    std::cout << "\tc: Quits the program" << std::endl << std::endl;
 
-    for (int i = 0; i < 20; i++)
+    // Loop for user input
+    char input = 'c';
+    do
     {
-        mc.stepAll(workers, goods, &qc);
-        qc.printQueue();
-        qc.processQueue();
-        mc.printMap();
-        std::cout << std::endl;
+        std::cout << "Enter a command: ";
+        std::cin >> input;
 
-    }
+        switch (input)
+        {
+        case 'r': // Auto run the simulation
+            sc.runFullSimulation();
+            break;
+        case 'n': // Next simulation step
+            sc.stepNext();
+            break;
+        case 'i': // Print current step info
+            sc.printStepInfo();
+            break;
+        case 'm': // Print map
+            sc.mc->printMap();
+            break;
+        case 'p': // Print pollution map
+            sc.mc->printPollutionMap();
+            break;
+        case 'a':
+            sc.mc->printCombinedMap();
+            break;
+        case 'q': // Print queue
+            sc.qc->printQueue();
+            break;
+        case 'c': // Quit program
+            break;
+        default:
+            std::cout << "Not a valid input." << std::endl;
+        }
+
+        std::cout << std::endl;
+    } while (input != 'c');
+
 }

@@ -122,28 +122,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\CommercialCell.cpp" />
-    <ClCompile Include="src\IndustrialCell.cpp" />
-    <ClCompile Include="src\MapCell.cpp" />
-    <ClCompile Include="src\MapController.cpp" />
-    <ClCompile Include="src\QueueController.cpp" />
-    <ClCompile Include="src\QueueNode.cpp" />
-    <ClCompile Include="src\ResidentialCell.cpp" />
-    <ClCompile Include="src\SimCity.cpp" />
+    <ClCompile Include="src\*" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\CommercialCell.h" />
-    <ClInclude Include="include\IndustrialCell.h" />
-    <ClInclude Include="include\QueueController.h" />
-    <ClInclude Include="include\QueueNode.h" />
-    <ClInclude Include="include\ResidentialCell.h" />
-    <ClInclude Include="include\MapCell.h" />
-    <ClInclude Include="include\MapController.h" />
+    <ClInclude Include="include\*" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="config.txt" />
     <Text Include="data\region1.csv">
       <FileType>Document</FileType>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\region2.csv" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

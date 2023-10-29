@@ -6,6 +6,19 @@ QueueController::QueueController(int& w, int& g)
 	this->goods = &g;
 }
 
+QueueController::~QueueController()
+{
+	// Delete queue nodes
+	QueueNode* qn = head;
+
+	while (qn != NULL)
+	{
+		QueueNode* tmp = qn->next;
+		delete qn;
+		qn = tmp;
+	}
+}
+
 void QueueController::insert(QueueNode* node)
 {
 	// Check if we need to insert node at front of list
@@ -58,6 +71,12 @@ void QueueController::printQueue()
 	int n = 0;
 	while (currentNode != NULL)
 	{
+		std::cout << "Coords\treqW\treqG\tPriority" << std::endl;
+		std::cout << "(" << currentNode->cell->col << "," << currentNode->cell->row << ")" << "\t";
+		std::cout << currentNode->reqWorkers << "\t";
+		std::cout << currentNode->reqGoods << "\t";
+		std::cout << currentNode->priority << "\t";
+		std::cout << std::endl;
 		n++;
 		currentNode = currentNode->next;
 	}

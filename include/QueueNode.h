@@ -44,10 +44,10 @@ public:
 	 * Constructor, handles variable assignment and priority calculation
 	 * 
 	 * @param &cell : Reference to the MapCell that created the node
-	 * @param workers : The required workers for cell growth
-	 * @param goods : The required goods for cell growth
+	 * @param rWorkers : The required workers for cell growth
+	 * @param rGoods : The required goods for cell growth
 	 */
-	QueueNode(MapCell& cell, int workers, int goods);
+	QueueNode(MapCell& cell, int rWorkers, int rGoods);
 
 	/**
 	 * Constructor, accepts only cell reference, and sets workers & goods based off of cell's type

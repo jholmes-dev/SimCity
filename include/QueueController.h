@@ -29,6 +29,12 @@ public:
 	QueueController(int& w, int& g);
 
 	/**
+	 * Destructor for freeing memory
+	 * 
+	 */
+	~QueueController();
+
+	/**
 	 * Inserts a given node into the queue
 	 * 
 	 * @param *node : Pointer to the node being inserted
